@@ -1,0 +1,21 @@
+{
+    "name": "skywalker/fpx_bot",
+    "type": "project",
+    "description": "The bot to manage a community",
+    "keywords": ["bot", "discord"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Adailton"
+        }
+    ],
+    "require": {
+        "team-reflex/discord-php": "^7.0",
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Src\\": "src/"
+        }
+    }
+}
