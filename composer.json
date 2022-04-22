@@ -6,7 +6,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Adailton"
+            "name": "Adailton",
+            "email": "contatoadailtonmoura@gmail.com"
         }
     ],
     "require": {
