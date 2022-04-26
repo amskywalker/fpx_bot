@@ -1,13 +1,11 @@
 <?php
 
-include __DIR__ . '/vendor/autoload.php';
+require "./bootstrap.php";
 
 use Discord\Discord;
 use Discord\Exceptions\IntentException;
-use Src\Championship\Game;
+use App\Services\Championship\Game;
 
-$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
-$dotenv->safeLoad();
 
 try {
     $game = new Game();
