@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services\Championship;
+namespace App\Gaming;
 
 use Discord\Discord;
 use Discord\Parts\Channel\Channel;

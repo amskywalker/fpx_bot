@@ -4,7 +4,7 @@ require "./bootstrap.php";
 
 use Discord\Discord;
 use Discord\Exceptions\IntentException;
-use App\Services\Championship\Game;
+use App\Gaming\Game;
 
 
 try {

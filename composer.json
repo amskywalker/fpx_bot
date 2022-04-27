@@ -13,8 +13,7 @@
     "require": {
         "php": "^8.0",
         "team-reflex/discord-php": "^7.0",
-        "vlucas/phpdotenv": "^5.4",
-        "illuminate/database": "^9.9"
+        "vlucas/phpdotenv": "^5.4"
     },
     "autoload": {
         "psr-4": {
