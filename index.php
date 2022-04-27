@@ -13,7 +13,7 @@ try {
         'token' => $_ENV['BOT_TOKEN'],
     ]);
     $discord->on('ready', function (Discord $discord) use ($game) {
-        $game->monitoring($discord);
+        $game->main($discord);
     });
     $discord->run();
 } catch (IntentException $e) {
