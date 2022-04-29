@@ -18,7 +18,7 @@ class Player
         });
     }
 
-    public function groupPlayersByPosition(Collection $players, string $position): array
+    public function groupPlayersByPosition(Collection $players, string $position): Collection
     {
         return $players->filter(function ($item) use ($position) {
             return $item->member->roles->filter(function ($role) use ($position) {
@@ -26,26 +26,26 @@ class Player
                 })->count() > 0;
         })->map(function ($item) {
             return $item->member->nick;
-        })->toArray();
+        });
     }
 
     #[ArrayShape(["type" => "string", "title" => "string", "description" => "string", "color" => "int"])]
     public function embedInfoPlayers(Collection $players): array
     {
         $description = "TOP LANERS \n";
-        $description .= implode("\n",$this->groupPlayersByPosition($players, "TOP"));
+        $description .= implode("\n",$this->groupPlayersByPosition($players, "TOP")->toArray());
 
         $description .= "\n \n JUNGLERS \n";
-        $description .= implode("\n",$this->groupPlayersByPosition($players, "JG"));
+        $description .= implode("\n",$this->groupPlayersByPosition($players, "JG")->toArray());
 
         $description .= "\n \n MID LANERS \n";
-        $description .= implode("\n",$this->groupPlayersByPosition($players, "MIND"));
+        $description .= implode("\n",$this->groupPlayersByPosition($players, "MIND")->toArray());
 
         $description .= "\n \n AD CARRIES \n";
-        $description .= implode("\n",$this->groupPlayersByPosition($players, "ADC"));
+        $description .= implode("\n",$this->groupPlayersByPosition($players, "ADC")->toArray());
 
         $description .= "\n \n SUPPORTS \n";
-        $description .= implode("\n",$this->groupPlayersByPosition($players, "SUP"));
+        $description .= implode("\n",$this->groupPlayersByPosition($players, "SUP")->toArray());
 
         return [
             "type" => "rich",
