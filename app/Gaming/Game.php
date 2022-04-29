@@ -22,7 +22,7 @@ class Game
             }
             $championship = new Championship($discord);
             match (true) {
-                str_contains($message->content, "!championship") => $championship->create(str_replace("!championship", "", $message->content), $message->channel),
+                str_contains($message->content, "!championship") => $championship->run(str_replace("!championship", "", $message->content), $message->channel),
                 default => ""
             };
         });
