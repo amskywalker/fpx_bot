@@ -7,12 +7,12 @@ use JetBrains\PhpStorm\ArrayShape;
 class GameNotification
 {
     #[ArrayShape(["type" => "string", "title" => "string", "description" => "string", "color" => "int"])]
-    public static function start(string $name): array
+    public static function start(array $data): array
     {
         return [
             "type" => "rich",
-            "title" => $name,
-            "description" => "O torneio foi iniciado ⚔️",
+            "title" => $data['name'],
+            "description" => "O torneio foi {$data['mode']} iniciado ⚔️",
             "color" => 16451840,
         ];
     }
