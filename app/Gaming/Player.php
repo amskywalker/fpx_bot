@@ -8,9 +8,17 @@ use JetBrains\PhpStorm\ArrayShape;
 
 class Player
 {
-    public function all(Discord $discord): Collection
+    protected Discord $discord;
+
+    public function __construct(Discord $discord)
     {
-        $channel = $discord->getChannel($_ENV['SAGUAO_CHANNEL_ID']);
+        $this->discord = $discord;
+    }
+
+    public function all(): Collection
+    {
+        $channel = $this->discord->getChannel($_ENV['SAGUAO_CHANNEL_ID']);
+
         return $channel->members->filter(function ($item) {
             return $item->member->roles->filter(function ($role) {
                     return in_array($role->name, ["TOP", "JG", "MID", "ADC", "SUP"]);
@@ -30,8 +38,10 @@ class Player
     }
 
     #[ArrayShape(["type" => "string", "title" => "string", "description" => "string", "color" => "int"])]
-    public function embedInfoPlayers(Collection $players): array
+    public function embedInfoPlayers(): array
     {
+        $players = $this->all();
+
         $description = "TOP LANERS \n";
         $description .= implode("\n",$this->groupPlayersByPosition($players, "TOP")->toArray());
 
