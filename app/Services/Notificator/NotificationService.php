@@ -9,9 +9,9 @@ use React\Promise\ExtendedPromiseInterface;
 class NotificationService
 {
 
-    public static function send(Discord $discord, array $data): ExtendedPromiseInterface
+    public static function send(Discord $discord, array $data): ?ExtendedPromiseInterface
     {
         $embed = new Embed($discord, $data);
-        return $discord->getChannel($_ENV['MAIN_CHANNEL_ID'])->sendEmbed($embed);
+        return $discord->getChannel($_ENV['MAIN_CHANNEL_ID'])?->sendEmbed($embed);
     }
 }
