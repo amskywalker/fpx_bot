@@ -14,7 +14,6 @@ use React\Promise\ExtendedPromiseInterface;
 
 class Slash
 {
-    protected Discord $discord;
     protected RegisterClient $client;
     protected string $name;
     protected string $description;
@@ -23,20 +22,11 @@ class Slash
     protected ResponseService $responseService;
     public function __construct()
     {
-        try {
-            $this->discord = new Discord([
-                'token' => $_ENV['BOT_TOKEN'],
-                'logger' => new Logger('New logger'),
-
-            ]);
-        } catch (IntentException $e) {
-        }
         $this->client = new RegisterClient($_ENV['BOT_TOKEN']);
         $this->responseService = new ResponseService();
     }
     public function addCommand(): Command
     {
-
         return $this->client->createGlobalCommand($this->name, $this->description, $this->options);
     }
 

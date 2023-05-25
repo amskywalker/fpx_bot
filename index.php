@@ -23,7 +23,7 @@ try {
     $discord->on('ready', function (Discord $discord) {
         $discord->on(Event::INTERACTION_CREATE, function (Interaction $interaction, Discord $discord) {
             match (true) {
-                $interaction->data->name == "game" => $game = new Game($interaction),
+                $interaction->data->name == "game" => new Game($interaction, $discord),
                 default => $interaction->respondWithMessage((new ResponseService)->run(DefaultResponse::definition()))
             };
         });

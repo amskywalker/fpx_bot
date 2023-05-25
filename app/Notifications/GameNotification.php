@@ -2,17 +2,20 @@
 
 namespace App\Notifications;
 
+use Discord\Repository\Interaction\OptionRepository;
 use JetBrains\PhpStorm\ArrayShape;
 
 class GameNotification
 {
     #[ArrayShape(["type" => "string", "title" => "string", "description" => "string", "color" => "int"])]
-    public static function start(array $data): array
+    public static function start(OptionRepository $options): array
     {
+        $name = $options->get('name', 'nome');
+        $mode = $options->get('name', 'modo');
         return [
             "type" => "rich",
-            "title" => $data['name'],
-            "description" => "O torneio foi {$data['mode']} iniciado ⚔️",
+            "title" => $name->value,
+            "description" => "O torneio foi {$mode->value} iniciado ⚔️",
             "color" => 16451840,
         ];
     }

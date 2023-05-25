@@ -5,6 +5,7 @@ namespace App\Commands\Slash;
 use App\Notifications\GameNotification;
 use App\Responses\ErrorResponse;
 use App\Services\Notificator\NotificationService;
+use Discord\Discord;
 use Discord\Parts\Interactions\Command\Option;
 use Discord\Repository\Interaction\OptionRepository;
 use Discord\Parts\Interactions\Interaction;
@@ -13,6 +14,7 @@ use React\Promise\ExtendedPromiseInterface;
 
 class Game extends Slash
 {
+    protected Discord $discord;
     protected string $name = "game";
     protected string $description = "Inicia um novo torneio";
     protected array $options = [
@@ -47,10 +49,11 @@ class Game extends Slash
         ]
     ];
 
-    public function __construct(Interaction $interaction)
+    public function __construct(Interaction $interaction, Discord $discord)
     {
         try {
             parent::__construct();
+            $this->discord = $discord;
             $this->run($interaction->data->options, $interaction);
         } catch (Exception $exception) {
             $errorResponse = ErrorResponse::definition();
@@ -63,11 +66,7 @@ class Game extends Slash
      */
     public function run(OptionRepository $options, Interaction $interaction): ExtendedPromiseInterface
     {
-        $name = $options->get('name', 'nome');
-        $mode = $options->get('name', 'modo');
-        $data['name'] = $name->value;
-        $data['mode'] = $mode->value;
-        NotificationService::send($this->discord, GameNotification::start($data));
+        NotificationService::send($this->discord, GameNotification::start($options));
         return $this->response($interaction);
     }
 }
